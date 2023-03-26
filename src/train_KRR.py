@@ -102,9 +102,6 @@ for i in range(1,8):
     MAE = np.mean(np.abs(Y_pred - Y_test))
     MAE_list.append(MAE)
     X_train_subset_size.append(X_train_subset.shape[0])
-    # print("For Each Iteration ", i )
-    # print("Alpha: ", alpha)
-    # print("Alpha Shape: ", alpha.shape)
     print(X_train_subset.shape[0])
     print("MAE: ", MAE)
 
