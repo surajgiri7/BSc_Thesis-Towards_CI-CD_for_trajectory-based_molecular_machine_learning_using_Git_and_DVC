@@ -1,0 +1,120 @@
+# author: Suraj Giri
+# BSc Thesis, CS, Contructor University
+
+# importing the libraries
+import numpy as np
+import pandas as pd
+import os
+import matplotlib.pyplot as plt
+import qml
+from qml.kernels import gaussian_kernel
+
+# Preprocessing imported data
+from import_dataset import compounds, energies
+print("Compounds: ")
+print(compounds[0:10])
+
+# Feature Engineering
+# Generating Coulomb matrices for every molecule in the dataset
+for mol in compounds:
+    mol.generate_coulomb_matrix(size=12, sorting="row-norm")
+
+# making a big 2D array with coloumb matrix of all the molecules
+X = np.array([mol.representation for mol in compounds])
+print(len(X))
+print("Coloumb matrix for first element: \n",X[0])
+
+
+
+# Splitting the dataset into the Training set and Test set with 80:20 ratio
+X_train = X[:int(0.8*len(X))]
+X_test = X[int(0.8*len(X)):]
+Y_train = np.array([mol.properties for mol in compounds[:int(0.8*len(X))]])
+Y_test = energies[int(0.8*len(X)):]
+
+print("Training set: ")
+print(X_train)
+print(X_train.shape)
+print(Y_train)
+print(Y_train.shape)
+
+print("\n")
+print("Testing set: ")
+print(X_test)
+print(X_test.shape)
+print(Y_test)
+print(Y_test.shape)
+
+
+# Selecting and Defining the Gaussian Kernel for the KRR model
+# Defining the Kernel width
+sigma = 1000.0
+
+# Defining the Kernel K as a numpy array for the training set
+K = gaussian_kernel(X_train, X_train, sigma)
+
+print(K.shape)
+print(K)
+
+
+# KRR model using QML
+# Adding a small lambda to the diagonal of the kernel matrix for "Ridge Regularization"
+K[np.diag_indices_from(K)] += 1e-8
+
+# Solving the linear system of equations using the Cholesky decomposition
+from qml.math import cho_solve
+alpha = cho_solve(K, Y_train)
+
+print("Alpha: ")
+print(alpha)
+print(alpha.shape)
+
+# Predicting the Test set results using the KRR model
+# Calculating the kernel matrix between test and training set using same sigma
+K_test_train = gaussian_kernel(X_test, X_train, sigma)
+
+# Calculating the predicted energies
+Y_pred = np.dot(K_test_train, alpha)
+print("Predicted Energies: ")
+print(Y_pred)
+print(Y_pred.shape)
+
+# Calculating the mean absolute error
+MAE = np.mean(np.abs(Y_pred - Y_test))
+print("Mean Absolute Error: ", MAE)
+
+# Plotting the loglog plot of the MAE vs Training set size
+# Generating the list of MAE for learning curve
+# Taking 10%, 20%, 30%, 40%, 50%, 60%, 70% of the training set
+MAE_list = []
+X_train_subset_size = []
+for i in range(1,8):
+    X_train_subset = X[:int(i*0.1*len(X))]
+    Y_train_subset = np.array([mol.properties for mol in compounds[:int(i*0.1*len(X))]])
+    sigma = 1000.0
+    K = gaussian_kernel(X_train_subset, X_train_subset, sigma)
+    K[np.diag_indices_from(K)] += 1e-8
+    alpha = cho_solve(K, Y_train_subset)
+    K_test_train = gaussian_kernel(X_test, X_train_subset, sigma)
+    Y_pred = np.dot(K_test_train, alpha)
+    MAE = np.mean(np.abs(Y_pred - Y_test))
+    MAE_list.append(MAE)
+    X_train_subset_size.append(X_train_subset.shape[0])
+    # print("For Each Iteration ", i )
+    # print("Alpha: ", alpha)
+    # print("Alpha Shape: ", alpha.shape)
+    print(X_train_subset.shape[0])
+    print("MAE: ", MAE)
+
+print("X_train_subset_size: \n", X_train_subset_size)
+print("MAE List: \n", MAE_list)
+
+# Plotting the graph
+# Plotting the loglog plot of learning curve of MAE vs training set sizes
+plt.figure(figsize=(6, 6))
+plt.loglog(X_train_subset_size, MAE_list, 'o-')
+plt.xlabel('Training set size')
+plt.ylabel('MAE')
+plt.title('Learning Curve: MAE vs Training set size - LOGLOG PLOT')
+plt.savefig('Learning Curve.png')
+plt.show()
