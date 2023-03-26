@@ -8,6 +8,8 @@ import os
 import matplotlib.pyplot as plt
 import qml
 from qml.kernels import gaussian_kernel
+import pickle
+import csv
 
 # Preprocessing imported data
 from import_dataset import compounds, energies
@@ -109,6 +111,24 @@ for i in range(1,8):
 print("X_train_subset_size: \n", X_train_subset_size)
 print("MAE List: \n", MAE_list)
 
+
+# Creating the output folders ../output/plots and ../output/models if they don't exist
+if not os.path.exists('./output/plots'):
+    os.makedirs('./output/plots')
+if not os.path.exists('./output/model'):
+    os.makedirs('./output/model')
+
+# Saving the KRR model as a pickle file inside ../output/model
+pickle.dump(alpha, open('./output/model/KRR_model.pkl', 'wb'))
+
+# Saving the MAE list for each training set size as a csv file inside ../output/plots
+with open('./output/metrics.csv', mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['Training Set Size', 'MAE'])
+    for i, mae in enumerate(MAE_list):
+        writer.writerow([X_train_subset_size[i], mae])
+
+
 # Plotting the graph
 # Plotting the loglog plot of learning curve of MAE vs training set sizes
 plt.figure(figsize=(6, 6))
@@ -116,5 +136,6 @@ plt.loglog(X_train_subset_size, MAE_list, 'o-')
 plt.xlabel('Training set size')
 plt.ylabel('MAE')
 plt.title('Learning Curve: MAE vs Training set size - LOGLOG PLOT')
-plt.savefig('Learning Curve.png')
-plt.show()
+# saving the plot
+plt.savefig('./output/plots/Learning_Curve.png')
+# plt.show()
