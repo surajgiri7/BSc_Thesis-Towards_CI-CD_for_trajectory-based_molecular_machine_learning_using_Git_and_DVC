@@ -116,7 +116,22 @@ if not os.path.exists('./output/model'):
     os.makedirs('./output/model')
 
 # Saving the KRR model as a pickle file inside ../output/model
-pickle.dump(alpha, open('./output/model/KRR_model.pkl', 'wb'))
+model = {
+    'alpha': alpha,
+    'sigma': sigma,
+    'X_train': X_train,
+    'Y_train': Y_train,
+    'X_test': X_test,
+    'Y_test': Y_test,
+    'Y_pred': Y_pred,
+    'MAE': MAE,
+    'MAE_list': MAE_list,
+    'X_train_subset_size': X_train_subset_size,
+    'Y_train_subset': Y_train_subset,
+}
+
+with open ('./output/model/KRR_model.pkl', 'wb') as f:
+    pickle.dump(model, f)
 
 # Saving the MAE list for each training set size as a csv file inside ../output/plots
 with open('./output/metrics.csv', mode='w', newline='') as file:
