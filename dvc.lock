@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train_KRR.py
+    deps:
+    - path: dataset/
+      md5: a27e9cf9e97d080ba4f979df473b603c.dir
+      size: 19620000
+      nfiles: 20003
+    - path: src/train_KRR.py
+      md5: 58b3637248ca475230763963745f26ae
+      size: 4458
+    outs:
+    - path: output/metrics.csv
+      md5: 0fa20fa14f6734ee2418691a63d3d124
+      size: 216
+    - path: output/model/KRR_model.pkl
+      md5: 6d1e6cde68ec9a119376f37bd51a5436
+      size: 12896711
+    - path: output/plots/Learning_Curve.png
+      md5: 47e6491adb523895c358e2b721647e11
+      size: 24985
