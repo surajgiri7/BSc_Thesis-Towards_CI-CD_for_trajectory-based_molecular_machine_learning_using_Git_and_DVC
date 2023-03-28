@@ -7,7 +7,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import qml
-from qml.kernels import gaussian_kernel
+from qml.kernels import matern_kernel
 import pickle
 import csv
 
@@ -53,7 +53,7 @@ print(Y_test.shape)
 sigma = 1000.0
 
 # Defining the Kernel K as a numpy array for the training set
-K = gaussian_kernel(X_train, X_train, sigma)
+K = matern_kernel(X_train, X_train, sigma)
 
 print(K.shape)
 print(K)
@@ -73,7 +73,7 @@ print(alpha.shape)
 
 # Predicting the Test set results using the KRR model
 # Calculating the kernel matrix between test and training set using same sigma
-K_test_train = gaussian_kernel(X_test, X_train, sigma)
+K_test_train = matern_kernel(X_test, X_train, sigma)
 
 # Calculating the predicted energies
 Y_pred = np.dot(K_test_train, alpha)
@@ -94,10 +94,10 @@ for i in range(1,8):
     X_train_subset = X[:int(i*0.1*len(X))]
     Y_train_subset = np.array([mol.properties for mol in compounds[:int(i*0.1*len(X))]])
     sigma = 1000.0
-    K = gaussian_kernel(X_train_subset, X_train_subset, sigma)
+    K = matern_kernel(X_train_subset, X_train_subset, sigma)
     K[np.diag_indices_from(K)] += 1e-8
     alpha = cho_solve(K, Y_train_subset)
-    K_test_train = gaussian_kernel(X_test, X_train_subset, sigma)
+    K_test_train = matern_kernel(X_test, X_train_subset, sigma)
     Y_pred = np.dot(K_test_train, alpha)
     MAE = np.mean(np.abs(Y_pred - Y_test))
     MAE_list.append(MAE)
