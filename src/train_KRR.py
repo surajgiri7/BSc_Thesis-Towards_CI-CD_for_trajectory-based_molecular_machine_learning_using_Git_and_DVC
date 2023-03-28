@@ -90,7 +90,7 @@ print("Mean Absolute Error: ", MAE)
 # Taking 10%, 20%, 30%, 40%, 50%, 60%, 70% of the training set
 MAE_list = []
 X_train_subset_size = []
-for i in range(1,8):
+for i in range(1,9):
     X_train_subset = X[:int(i*0.1*len(X))]
     Y_train_subset = np.array([mol.properties for mol in compounds[:int(i*0.1*len(X))]])
     sigma = 1000.0

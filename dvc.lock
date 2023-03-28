@@ -4,19 +4,19 @@ stages:
     cmd: python src/train_KRR.py
     deps:
     - path: dataset/
-      md5: a27e9cf9e97d080ba4f979df473b603c.dir
-      size: 19620000
-      nfiles: 20003
+      md5: 2ed55dda1d7e8aa7038db7390fd15e15.dir
+      size: 13080000
+      nfiles: 10003
     - path: src/train_KRR.py
-      md5: 58b3637248ca475230763963745f26ae
+      md5: c5178a3e13ea083da949cec4f428289f
       size: 4458
     outs:
     - path: output/metrics.csv
-      md5: 0fa20fa14f6734ee2418691a63d3d124
-      size: 216
+      md5: 508a424cc65675b4de39cc7a5e6b3ccc
+      size: 233
     - path: output/model/KRR_model.pkl
-      md5: 6d1e6cde68ec9a119376f37bd51a5436
-      size: 12896711
+      md5: 9defef05e6c77c9097b627164ed62ca7
+      size: 6464706
     - path: output/plots/Learning_Curve.png
-      md5: 47e6491adb523895c358e2b721647e11
-      size: 24985
+      md5: 7d1e3f4d0e6b31128d5096a8802272b1
+      size: 27039
