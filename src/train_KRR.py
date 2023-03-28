@@ -50,10 +50,12 @@ print(Y_test.shape)
 
 # Selecting and Defining the Gaussian Kernel for the KRR model
 # Defining the Kernel width
-sigma = 1000.0
+sigma = 25.0
+order = 0
+metric = 'l1'
 
 # Defining the Kernel K as a numpy array for the training set
-K = matern_kernel(X_train, X_train, sigma)
+K = matern_kernel(X_train, X_train, sigma, order, metric)
 
 print(K.shape)
 print(K)
@@ -73,7 +75,7 @@ print(alpha.shape)
 
 # Predicting the Test set results using the KRR model
 # Calculating the kernel matrix between test and training set using same sigma
-K_test_train = matern_kernel(X_test, X_train, sigma)
+K_test_train = matern_kernel(X_test, X_train, sigma, order, metric)
 
 # Calculating the predicted energies
 Y_pred = np.dot(K_test_train, alpha)
@@ -94,10 +96,10 @@ for i in range(1,9):
     X_train_subset = X[:int(i*0.1*len(X))]
     Y_train_subset = np.array([mol.properties for mol in compounds[:int(i*0.1*len(X))]])
     sigma = 1000.0
-    K = matern_kernel(X_train_subset, X_train_subset, sigma)
+    K = matern_kernel(X_train_subset, X_train_subset, sigma, order, metric)
     K[np.diag_indices_from(K)] += 1e-8
     alpha = cho_solve(K, Y_train_subset)
-    K_test_train = matern_kernel(X_test, X_train_subset, sigma)
+    K_test_train = matern_kernel(X_test, X_train_subset, sigma, order, metric)
     Y_pred = np.dot(K_test_train, alpha)
     MAE = np.mean(np.abs(Y_pred - Y_test))
     MAE_list.append(MAE)
