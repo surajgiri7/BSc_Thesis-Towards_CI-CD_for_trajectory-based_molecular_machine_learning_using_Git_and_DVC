@@ -1,0 +1,4 @@
+train:
+  sigma: 25.0
+  order: 0
+  metric: "l1"

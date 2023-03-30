@@ -1,0 +1,24 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - dataset
+    - src/prepare.py
+    outs:
+    - output/prepared_data.pkl
+
+  train:
+    cmd: python src/train.py
+    deps:
+    - output/prepared_data.pkl
+    - src/train.py
+    outs:
+    - output/models/KRR_model.pkl
+    - output/plots/Learning_Curve.png
+    metrics:
+    - output/metrics.csv:
+        cache: false
+    params:
+    - train.metric
+    - train.order
+    - train.sigma
