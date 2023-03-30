@@ -8,7 +8,7 @@ stages:
     - output/prepared_data.pkl
 
   train:
-    cmd: python src/train.py
+    cmd: python src/train.py output/prepared_data.pkl
     deps:
     - output/prepared_data.pkl
     - src/train.py

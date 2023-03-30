@@ -90,7 +90,7 @@ X_train_subset_size = []
 for i in range(1,9):
     X_train_subset = X[:int(i*0.1*len(X))]
     Y_train_subset = np.array([mol.properties for mol in compounds[:int(i*0.1*len(X))]])
-    sigma = 1000.0
+    sigma = sigma
     K = matern_kernel(X_train_subset, X_train_subset, sigma, order, metric)
     K[np.diag_indices_from(K)] += 1e-8
     alpha = cho_solve(K, Y_train_subset)
@@ -129,7 +129,7 @@ with open('./output/metrics.csv', 'w') as f:
 
 # Saving the KRR model as a pickle file
 with open('./output/models/KRR_model.pkl', 'wb') as f:
-    pickle.dump([sigma, order, metric, alpha], f)
+    pickle.dump([sigma, order, metric, alpha, K_test_train], f)
 
 # Saving the devised dataset into pickle files for future use
 if not os.path.exists('./output/dataset'):
