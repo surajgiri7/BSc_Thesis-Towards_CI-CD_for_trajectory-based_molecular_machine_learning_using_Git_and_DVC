@@ -12,6 +12,7 @@ stages:
     deps:
     - output/prepared_data.pkl
     - src/train.py
+    - dataset
     outs:
     - output/models/KRR_model.pkl
     - output/plots/Learning_Curve.png

@@ -3,6 +3,10 @@ stages:
   train:
     cmd: python src/train.py output/prepared_data.pkl
     deps:
+    - path: dataset
+      md5: 2ed55dda1d7e8aa7038db7390fd15e15.dir
+      size: 13080000
+      nfiles: 10003
     - path: output/prepared_data.pkl
       md5: af8572d87f1054d393ad6d78e8711707
       size: 7010254
@@ -16,14 +20,14 @@ stages:
         train.sigma: 25.0
     outs:
     - path: output/metrics.csv
-      md5: 50f9c33302c30f31548af396a209a9f3
-      size: 55
+      md5: c96a3e72a2bcdd2590f611eb95d83417
+      size: 53
     - path: output/models/KRR_model.pkl
-      md5: e5722d2a7373c5530735b98dda1658c8
+      md5: ad4886195b1f96d86f0bd474fcccfb42
       size: 128064217
     - path: output/plots/Learning_Curve.png
-      md5: 40668cddbf44f966842d9fa976326cd4
-      size: 29803
+      md5: 2281247b48dd08e6b13a9c86623631a3
+      size: 29548
   prepare:
     cmd: python src/prepare.py
     deps:
