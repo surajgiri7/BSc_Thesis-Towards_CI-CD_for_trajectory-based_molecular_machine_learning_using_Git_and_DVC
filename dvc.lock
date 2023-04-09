@@ -46,17 +46,17 @@ stages:
     cmd: python src/test.py output/dataset
     deps:
     - path: output/dataset
-      md5: 4cb699db94beb9779be230cf15887835.dir
+      md5: 1da5b2ead7181f0739814659b8e951e2.dir
       size: 6320626
       nfiles: 4
     - path: src/test.py
-      md5: 541026d07e7cad6d6e02e07d43343e9d
-      size: 3607
+      md5: 43ac3adcf71190ad078847310f4c9f60
+      size: 3624
     outs:
-    - path: output/test/actual_predicted
-      md5: f4112b1504252356938d2150d2c1b59f.dir
-      size: 1002716
+    - path: output/test/actual_pred
+      md5: f9ab49cc10518a8b3925c1070a9b2efc.dir
+      size: 1113212
       nfiles: 2
     - path: output/test/live/metrics.json
-      md5: 8f0274a1ab4f22fa4299f4ed8c7c0d80
+      md5: 756142672a0f972030c1029eeda78b1c
       size: 161

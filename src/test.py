@@ -60,20 +60,20 @@ def test_n_evaluate(K, alpha, X, Y, live, type):
     live.summary["errors"]["RMSE"] = RMSE
     live.summary["errors"]["COD"] = COD
 
-    molecule = [{"actual": str(Y[i]), "predicted": str(Y_pred[i])} for i in range(len(Y))]
+    molecule = [{"molecule": str(i+1), "actual": str(Y[i]), "predicted": str(Y_pred[i])} for i in range(len(Y))]
 
     data = {}
     for i, item in enumerate(molecule):
         data[f"molecule_{i+1}"] = item
 
     # logging the actual and predicted energies for each molecule to the ./output/test/live/{type}.json file
-    json_path = "./output/test/actual_predicted"
+    json_path = "./output/test/actual_pred"
     if not os.path.exists(os.path.join(json_path)):
         os.makedirs(os.path.join(json_path))
     json_file = os.path.join(json_path, f"{type}.json")
     with open(json_file, "w") as f:
-        json.dump(data, f, indent=4)
-        # json.dump(molecule, f, indent=4)
+        # json.dump(data, f, indent=4)
+        json.dump(molecule, f, indent=4)
 
 
 # loading the KRR model from the KRR_model.pkl file

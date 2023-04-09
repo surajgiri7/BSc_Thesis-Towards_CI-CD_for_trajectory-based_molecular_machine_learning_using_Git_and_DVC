@@ -30,7 +30,38 @@ stages:
     - output/dataset
     - src/test.py
     outs:
-    - output/test/actual_predicted
+    - output/test/actual_pred
     metrics:
     - output/test/live/metrics.json:
         cache: false
+
+plots:
+  - APTrain:
+      template: linear
+      title: Actual - Pred - Train
+      x_label: Molecule
+      y_label: Energy
+      x: molecule
+      y:
+        output/test/actual_pred/train.json: "actual"
+        # output/test/actual_pred/train.json: "predicted"
+  - APTest:
+      template: linear
+      title: Actual - Pred - Test
+      x_label: Molecule
+      y_label: Energy
+      x: molecule
+      y:
+        output/test/actual_pred/test.json: "actual"
+        # output/test/actual_pred/test.json: "predicted"
+  - CSV:
+      template: scatter
+      title: Metrics
+      # file: output/metrics.csv
+      x: sigma
+      y:
+        output/metrics.csv: MAE
+      x_label: Sigma
+      y_label: MAE Value
+  - output/plots/Learning_Curve.png
+
