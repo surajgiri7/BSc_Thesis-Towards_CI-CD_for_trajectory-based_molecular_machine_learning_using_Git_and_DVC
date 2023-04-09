@@ -23,3 +23,14 @@ stages:
     - train.metric
     - train.order
     - train.sigma
+  
+  test:
+    cmd: python src/test.py output/dataset
+    deps: 
+    - output/dataset
+    - src/test.py
+    outs:
+    - output/test/actual_predicted
+    metrics:
+    - output/test/live/metrics.json:
+        cache: false

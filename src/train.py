@@ -129,7 +129,7 @@ with open('./output/metrics.csv', 'w') as f:
 
 # Saving the KRR model as a pickle file
 with open('./output/models/KRR_model.pkl', 'wb') as f:
-    pickle.dump([sigma, order, metric, alpha, K_test_train], f)
+    pickle.dump([sigma, order, metric, alpha, K_test_train, K], f)
 
 # Saving the devised dataset into pickle files for future use
 if not os.path.exists('./output/dataset'):
