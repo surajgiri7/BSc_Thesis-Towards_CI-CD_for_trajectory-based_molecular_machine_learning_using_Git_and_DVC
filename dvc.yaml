@@ -19,6 +19,8 @@ stages:
     metrics:
     - output/metrics.csv:
         cache: false
+    - output/metrics.json:
+        cache: false
     params:
     - train.metric
     - train.order

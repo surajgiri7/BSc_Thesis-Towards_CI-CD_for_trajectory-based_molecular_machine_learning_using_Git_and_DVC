@@ -12,6 +12,7 @@ import pickle
 import csv
 import yaml
 from qml.math import cho_solve
+import json
 
 # Importing the dataset from the prepared_data.pkl file
 with open("./output/prepared_data.pkl", "rb") as f:
@@ -126,6 +127,9 @@ with open('./output/metrics.csv', 'w') as f:
     writer = csv.writer(f)
     writer.writerow(['sigma', 'order', 'metric', 'MAE'])
     writer.writerow([sigma, order, metric, MAE])
+# saving the metrics in a json file
+with open('./output/metrics.json', 'w') as f:
+    json.dump({'sigma': sigma, 'order': order, 'metric': metric, 'MAE': MAE}, f)
 
 # Saving the KRR model as a pickle file
 with open('./output/models/KRR_model.pkl', 'wb') as f:
