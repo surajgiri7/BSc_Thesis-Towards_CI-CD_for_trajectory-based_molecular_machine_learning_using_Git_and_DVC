@@ -12,6 +12,7 @@ import pickle
 import csv
 import yaml
 from qml.math import cho_solve
+import json
 
 # Importing the dataset from the prepared_data.pkl file
 with open("./output/prepared_data.pkl", "rb") as f:
@@ -115,6 +116,7 @@ if not os.path.exists('./output/models'):
 # Plotting the loglog plot of learning curve of MAE vs training set sizes
 plt.figure(figsize=(6, 6))
 plt.loglog(X_train_subset_size, MAE_list, 'o-')
+plt.grid(True)
 plt.xlabel('Training set size')
 plt.ylabel('MAE')
 plt.title('Learning Curve: MAE vs Training set size - LOGLOG PLOT')
@@ -127,6 +129,10 @@ with open('./output/metrics.csv', 'w') as f:
     writer.writerow(['sigma', 'order', 'metric', 'MAE'])
     writer.writerow([sigma, order, metric, MAE])
 
+# saving the metrics in a json file
+with open('./output/metrics.json', 'w') as f:
+    json.dump({'sigma': sigma, 'order': order, 'metric': metric, 'MAE': MAE}, f)
+
 # Saving the KRR model as a pickle file
 with open('./output/models/KRR_model.pkl', 'wb') as f:
     pickle.dump([sigma, order, metric, alpha, K_test_train, K], f)
@@ -134,7 +140,7 @@ with open('./output/models/KRR_model.pkl', 'wb') as f:
 # Saving the devised dataset into pickle files for future use
 if not os.path.exists('./output/dataset'):
     os.makedirs('./output/dataset')
-# exporting the X_train, Y_train, X_test, Y_test into ../output/dataset as pickle files
+# exporting the X_train, Y_train, X_test, Y_test into ../output/dataset as pickle files for using in test step
 with open('./output/dataset/X_train.pkl', 'wb') as f:
     pickle.dump(X_train, f)
 with open('./output/dataset/Y_train.pkl', 'wb') as f:

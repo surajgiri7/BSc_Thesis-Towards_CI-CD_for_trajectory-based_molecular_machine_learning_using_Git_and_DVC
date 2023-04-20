@@ -23,7 +23,8 @@ xyz_files.sort(key=lambda x: int(x.split("_")[1].split(".")[0]))
 energies = np.loadtxt(energy_file)
 print (energies)
 
-compounds = [qml.Compound(xyz=os.path.join(molcules_folder, xyz_file)) for xyz_file in xyz_files]
+# lisitng the molecules as compounds class
+compounds = [qml.Compound(xyz=os.path.join(molcules_folder, xyz_file)) for xyz_file in xyz_files] 
 print(compounds[0:10])
 
 for mol in compounds:
