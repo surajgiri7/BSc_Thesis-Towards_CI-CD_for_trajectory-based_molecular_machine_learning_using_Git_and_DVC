@@ -15,22 +15,22 @@ stages:
       size: 4989
     params:
       params.yaml:
-        train.metric: l2
+        train.metric: l1
         train.order: 0
-        train.sigma: 60.0
+        train.sigma: 25.0
     outs:
     - path: output/metrics.csv
-      md5: 41d5f18f55c60b3bd6c370548d2df164
-      size: 56
+      md5: 652e4d668593e03b02fcdb2a4dd0a68e
+      size: 54
     - path: output/metrics.json
-      md5: b6d852cc23435e7e9861deb62fa0f229
-      size: 72
+      md5: a5cdea4ef04b470a93fed33f75c4085c
+      size: 70
     - path: output/models/KRR_model.pkl
-      md5: 93528cad833f27eeccb50ba78bc68299
+      md5: eae19925190de62bab92f2737e895c1f
       size: 640064263
     - path: output/plots/Learning_Curve.png
-      md5: b7b3e55216bad3ce98434c27f1cfacfa
-      size: 28348
+      md5: cae768e3b220b038ffe2a3823500a06a
+      size: 29862
   prepare:
     cmd: python src/prepare.py
     deps:
