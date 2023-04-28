@@ -149,3 +149,5 @@ with open('./output/dataset/X_test.pkl', 'wb') as f:
     pickle.dump(X_test, f)
 with open('./output/dataset/Y_test.pkl', 'wb') as f:
     pickle.dump(Y_test, f)
+with open('./output/dataset/whole_dataset.pkl', 'wb') as f:
+    pickle.dump(X, f)

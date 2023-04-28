@@ -11,26 +11,26 @@ stages:
       md5: af8572d87f1054d393ad6d78e8711707
       size: 7010254
     - path: src/train.py
-      md5: 9723676d34cd50d5ed6578126970a472
-      size: 4989
+      md5: c3fbd22ce9fdb3b78e9a96b05ff0875f
+      size: 5071
     params:
       params.yaml:
-        train.metric: l1
+        train.metric: l2
         train.order: 0
-        train.sigma: 25.0
+        train.sigma: 60.0
     outs:
     - path: output/metrics.csv
-      md5: 652e4d668593e03b02fcdb2a4dd0a68e
-      size: 54
+      md5: 505e0f8a2fc415d64a9184d3907146bd
+      size: 56
     - path: output/metrics.json
-      md5: a5cdea4ef04b470a93fed33f75c4085c
-      size: 70
+      md5: 003085e8c51f97c0762e2f33e1708506
+      size: 72
     - path: output/models/KRR_model.pkl
-      md5: eae19925190de62bab92f2737e895c1f
+      md5: 3d3f4b7f0c11dbbcbe167b249fc0d2a5
       size: 640064263
     - path: output/plots/Learning_Curve.png
-      md5: cae768e3b220b038ffe2a3823500a06a
-      size: 29862
+      md5: 21035f4d39343805f13e2a7f189ece8a
+      size: 27743
   prepare:
     cmd: python src/prepare.py
     deps:
@@ -49,17 +49,17 @@ stages:
     cmd: python src/test.py output/dataset
     deps:
     - path: output/dataset
-      md5: 9aeb4ff21581c2fd5a58cc72e3d12b54.dir
-      size: 6320626
-      nfiles: 4
+      md5: 32c82e6f0be3fff31b2491c65c7d808a.dir
+      size: 12560788
+      nfiles: 5
     - path: src/test.py
       md5: 43ac3adcf71190ad078847310f4c9f60
       size: 3624
     outs:
     - path: output/test/actual_pred
-      md5: 0b31161a3962d74880adb40d5ea36aa2.dir
-      size: 1112935
+      md5: 3e27017900d8362d2d8134eb1b2adbc7.dir
+      size: 1116682
       nfiles: 2
     - path: output/test/live/metrics.json
-      md5: 8ba99fc62d5f0f8a2b9455cab7b302f1
+      md5: c8f1395e8eb5cded2f8344457a332734
       size: 160
