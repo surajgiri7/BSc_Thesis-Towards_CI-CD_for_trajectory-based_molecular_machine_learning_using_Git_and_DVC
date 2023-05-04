@@ -114,12 +114,13 @@ if not os.path.exists('./output/models'):
     os.makedirs('./output/models')
 
 # Plotting the loglog plot of learning curve of MAE vs training set sizes
-plt.figure(figsize=(6, 6))
+plt.figure(figsize=(10, 6))
 plt.loglog(X_train_subset_size, MAE_list, 'o-')
-plt.grid(True)
-plt.xlabel('Training set size')
+# plt.grid(True)
 plt.ylabel('MAE')
+plt.xlabel('Training set size')
 plt.title('Learning Curve: MAE vs Training Set Size')
+plt.plot()
 # saving the plot
 plt.savefig('./output/plots/Learning_Curve.png')
 
