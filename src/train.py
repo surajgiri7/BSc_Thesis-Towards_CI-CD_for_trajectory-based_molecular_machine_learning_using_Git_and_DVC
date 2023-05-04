@@ -21,7 +21,8 @@ with open("./output/prepared_data.pkl", "rb") as f:
 # Feature Engineering
 # Generating Coulomb matrices for every molecule in the dataset
 for mol in compounds:
-    mol.generate_coulomb_matrix(size=12, sorting="row-norm")
+    # mol.generate_coulomb_matrix(size=12, sorting="row-norm")
+    mol.generate_coulomb_matrix(size=12, sorting="unsorted")
 
 # making a big 2D array with coloumb matrix of all the molecules
 X = np.array([mol.representation for mol in compounds])

@@ -1,4 +1,4 @@
 train:
-  sigma: 60.0
+  sigma: 25.0
   order: 0
-  metric: "l2"
+  metric: "l1"
