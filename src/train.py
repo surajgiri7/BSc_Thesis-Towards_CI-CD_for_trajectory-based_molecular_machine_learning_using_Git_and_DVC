@@ -119,7 +119,7 @@ plt.loglog(X_train_subset_size, MAE_list, 'o-')
 plt.grid(True)
 plt.xlabel('Training set size')
 plt.ylabel('MAE')
-plt.title('Learning Curve: MAE vs Training set size - LOGLOG PLOT')
+plt.title('Learning Curve: MAE vs Training Set Size')
 # saving the plot
 plt.savefig('./output/plots/Learning_Curve.png')
 
