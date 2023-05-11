@@ -17,10 +17,10 @@
 
 For Feature Engineering, we used the `Coulomb Matrix` representations.
 Colomb Matrix can be calculated using formula:
-$M_{ij} = \begin{cases}
+$$M_{ij} = \begin{cases}
                 0.5Z_i^{2.4} & \text{if } i = j\\
                 \frac{Z_iZ_j}{|\boldsymbol{R}_i - \boldsymbol{R}_j|} & \text{if } i \neq j
-            \end{cases}$
+            \end{cases}$$
 
 where, $Z_i$ and $Z_j$ are the atomic numbers of the atoms $i$ and $j$, and $R_i$ and $R_j$ are the positions of the atoms $i$ and $j$. And $||\boldsymbol{R}_i - \boldsymbol{R}_j||$ is the euclidean distance between the $i^{th}$ and $j^{th}$ atoms.
 
