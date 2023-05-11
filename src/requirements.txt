@@ -1,5 +1,6 @@
 numpy
 pandas
-matplotlib.pyplot
+matplotlib
 qml
 yaml
+dvc_gdrive
