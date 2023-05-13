@@ -35,6 +35,15 @@ for mol in compounds:
 # energy_molecule = np.array([mol.properties for mol in compounds])
 # print(energy_molecule)
 
+# Feature Engineering
+# Generating Coulomb matrices for every molecule in the dataset
+for mol in compounds:
+    # mol.generate_coulomb_matrix(size=12, sorting="row-norm")
+    mol.generate_coulomb_matrix(size=12, sorting="unsorted")
+
+print("Coloumb matrix of the first molecule: ")
+print(compounds[0].representation)
+
 # Saving the dataset into output/prepared_data.pkl
 if not os.path.exists("./output"):
     os.makedirs("./output")
