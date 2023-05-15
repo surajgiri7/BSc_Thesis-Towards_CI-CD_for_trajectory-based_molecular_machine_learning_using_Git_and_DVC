@@ -3,6 +3,7 @@
 #### Author: Suraj Giri 
 #### Supervisor: Prof. Dr. Peter Zaspel
 ### **Preliminary Dataset** : a **.xyz** file with molecular trajectories of 10k C6H6 molecules and a **.dat** file with energies for those 10k molecules.
+### **GitHub Repo:** https://github.com/surajgiri7/BSc_Thesis_DVC
 
 #### Major Tasks:
 1. Developing **Kernel Ridge Regression in DVC Structure** 
